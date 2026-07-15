@@ -1,6 +1,6 @@
 # Myo Family Health Newsletter — Landing Page
 
-A free-newsletter signup landing page for **Myo Family Health**, styled to match the Myo Family Health mobile website (teal/mint palette, DM Sans + Newsreader type, tree logo).
+A free-newsletter signup landing page for **Myo Family Health**, using the official Myo Family Health logos (tree-of-life mark + wordmark, in `assets/`) and brand colors sampled from them (soft teal `#78B4B4`, charcoal `#3C4242`).
 
 ## What's on the page
 
