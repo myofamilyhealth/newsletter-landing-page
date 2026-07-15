@@ -1,6 +1,6 @@
-# Nose Gym Newsletter — Landing Page
+# Myo Family Health Newsletter — Landing Page
 
-A free-newsletter signup landing page for **Nose Gym** (myofamilyhealth), styled to match the main Nose Gym website (night-sky theme, hot-pink accent, NOSE GYM logo).
+A free-newsletter signup landing page for **Myo Family Health**, styled to match the Myo Family Health mobile website (teal/mint palette, DM Sans + Newsreader type, tree logo).
 
 ## What's on the page
 

@@ -1,511 +1,657 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Nose Gym Newsletter — Free Sleep &amp; Breathing Tips, Courses + Games</title>
-  <meta name="description" content="Sign up for the free Nose Gym newsletter: new courses, fun games, and the latest nasal breathing and sleep info — straight to your inbox. Official launch coming soon!">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
-  <style>
-    /* ============================================================
-       NOSE GYM — newsletter landing page
-       Night-sky theme: deep ink base, hot-pink brand accent, warm cream text
-       ============================================================ */
-    :root {
-      --ink-900: #070b16;
-      --ink-800: #0b1220;
-      --ink-700: #111a2e;
-      --ink-600: #1a2540;
-      --ink-500: #263457;
-      --line: rgba(148, 173, 222, 0.16);
-      --line-strong: rgba(148, 173, 222, 0.3);
-      --cream: #f4f1ea;
-      --muted: #9fadc8;
-      --pink: #ff00b0;
-      --pink-deep: #d1008f;
-      --gold: #f5c76b;
-      --coral: #ff7a6b;
-      --lavender: #a394ff;
-      --radius-lg: 22px;
-      --radius-md: 14px;
-      --radius-sm: 9px;
-      --font-display: "Sora", "Avenir Next", system-ui, sans-serif;
-      --font-body: "Inter", system-ui, -apple-system, sans-serif;
-      --shadow-card: 0 18px 50px rgba(2, 6, 16, 0.45);
-      --wrap: 1160px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Myo Family Health Newsletter — Free Courses, Games &amp; Fresh Info</title>
+<meta name="description" content="Sign up for the free Myo Family Health newsletter: new courses, fun games, and the latest information on breathing, sleep, and myofunctional health — straight to your inbox. Official launch coming soon!" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>" />
+<style>
+/* ============================================================
+   Myo Family Health — newsletter landing page
+   Design tokens + components (matches the main mobile site)
+   ============================================================ */
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  /* Brand palette */
+  --teal:        #2D6E6E;
+  --teal-deep:   #235757;
+  --teal-soft:   #3E8585;
+  --mint:        #E8F4F2;
+  --mint-deep:   #D6EBE7;
+  --slate:       #3D4F5C;
+  --slate-soft:  #5E707C;
+  --slate-faint: #8A99A2;
+  --offwhite:    #F7F9F8;
+  --white:       #FFFFFF;
+  --sage:        oklch(0.78 0.05 155);   /* soft botanical accent */
+  --sage-deep:   oklch(0.66 0.06 158);
+  --sand:        oklch(0.93 0.03 75);    /* warm neutral for family warmth */
+  --line:        rgba(61, 79, 92, 0.10);
 
-    html { scroll-behavior: smooth; }
+  /* Type */
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
 
-    body {
-      font-family: var(--font-body);
-      background: var(--ink-800);
-      color: var(--cream);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+  /* Radii */
+  --r-sm: 14px;
+  --r-md: 22px;
+  --r-lg: 32px;
+  --r-pill: 999px;
 
-    img, svg { max-width: 100%; display: block; }
+  /* Shadows */
+  --sh-sm: 0 2px 8px rgba(45, 110, 110, 0.06), 0 1px 2px rgba(61, 79, 92, 0.04);
+  --sh-md: 0 12px 32px -12px rgba(45, 110, 110, 0.18), 0 4px 12px -6px rgba(61, 79, 92, 0.08);
+  --sh-lg: 0 30px 70px -28px rgba(35, 87, 87, 0.32), 0 10px 24px -12px rgba(61, 79, 92, 0.10);
+  --glow:  0 8px 28px -6px rgba(45, 110, 110, 0.45);
 
-    a { color: inherit; text-decoration: none; }
+  /* Layout */
+  --maxw: 1200px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --nav-h: 76px;
+}
 
-    h1, h2, h3, h4 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
+* { box-sizing: border-box; }
 
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
 
-    section { position: relative; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--slate);
+  background: var(--offwhite);
+  line-height: 1.6;
+  font-size: 17px;
+  letter-spacing: 0.1px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--pink);
-    }
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--slate);
+  text-wrap: balance;
+}
 
-    .section-head { max-width: 640px; margin: 0 auto 52px; text-align: center; }
-    .section-head h2 {
-      font-size: clamp(1.8rem, 4vw, 2.7rem);
-      margin: 14px 0 14px;
-    }
-    .section-head p { color: var(--muted); font-size: 1.05rem; }
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; }
+button { font-family: inherit; cursor: pointer; }
 
-    /* ---------- Buttons ---------- */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.98rem;
-      padding: 15px 30px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: linear-gradient(120deg, var(--pink), #fc64f5);
-      color: #021221;
-      box-shadow: 0 10px 30px rgba(255, 0, 176, 0.35);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(255, 0, 176, 0.45); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--cream);
-      border: 1px solid var(--line-strong);
-    }
-    .btn-ghost:hover { border-color: var(--pink); color: var(--pink); transform: translateY(-2px); }
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
 
-    /* ---------- Announcement bar ---------- */
-    .announce {
-      background: linear-gradient(90deg, #420b33, #5c1247 45%, #420b33);
-      border-bottom: 1px solid rgba(255, 0, 176, 0.25);
-      font-size: 0.84rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-align: center;
-      padding: 9px 16px;
-      color: #fee6f7;
-    }
-    .announce strong { color: #fff; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.eyebrow::before {
+  content: "";
+  width: 22px; height: 2px;
+  background: var(--sage-deep);
+  border-radius: 2px;
+}
+.eyebrow.center::before { display: none; }
 
-    /* ---------- Header ---------- */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 90;
-      border-bottom: 1px solid var(--line);
-    }
-    .site-header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      background: rgba(7, 11, 22, 0.78);
-    }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      height: 72px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.22rem;
-      letter-spacing: -0.02em;
-    }
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--pink), var(--lavender));
-      color: var(--ink-900);
-      flex: none;
-    }
-    .logo span em { font-style: normal; color: var(--pink); }
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
 
-    /* ---------- Hero ---------- */
-    .hero {
-      padding: 88px 0 64px;
-      overflow: hidden;
-      text-align: center;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -220px; right: -160px;
-      width: 640px; height: 640px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 0, 176, 0.16), transparent 65%);
-      pointer-events: none;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -260px; left: -180px;
-      width: 560px; height: 560px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(163, 148, 255, 0.13), transparent 65%);
-      pointer-events: none;
-    }
-    .hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
-    .hero h1 {
-      font-size: clamp(2.4rem, 5.4vw, 3.9rem);
-      margin: 20px 0 18px;
-    }
-    .hero h1 .accent {
-      background: linear-gradient(100deg, var(--pink), var(--lavender));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero-sub { color: var(--muted); font-size: 1.12rem; max-width: 580px; margin: 0 auto; }
+.accent-underline {
+  position: relative;
+  display: inline;
+  background-image: linear-gradient(transparent 62%, rgba(127,169,142,0.42) 62%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 
-    .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(17, 26, 46, 0.6);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--muted);
-    }
-    .pill svg { color: var(--pink); flex: none; }
+/* ===================== Buttons ===================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 15px 28px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid transparent;
+  transition: transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  white-space: nowrap;
+}
+.btn svg { width: 18px; height: 18px; transition: transform .25s ease; }
 
-    .free-flag {
-      display: inline-block;
-      background: linear-gradient(120deg, var(--gold), #ffd98a);
-      color: #3d2a05;
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 0.74rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-radius: 999px;
-      padding: 7px 16px;
-      margin-bottom: 18px;
-    }
+.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  box-shadow: var(--sh-sm);
+}
+.btn-primary:hover {
+  background: var(--teal-deep);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+.btn-primary:hover svg { transform: translateX(4px); }
 
-    /* ---------- Signup section ---------- */
-    .signup { padding: 20px 0 88px; }
-    .signup-card {
-      position: relative;
-      z-index: 1;
-      max-width: 660px;
-      margin: 0 auto;
-      background: linear-gradient(160deg, var(--ink-700), var(--ink-600));
-      border: 1px solid rgba(255, 0, 176, 0.35);
-      border-radius: var(--radius-lg);
-      padding: 40px 28px 32px;
-      box-shadow: var(--shadow-card);
-      text-align: center;
-    }
-    .signup-card h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); margin: 12px 0 10px; }
-    .signup-card > p { color: var(--muted); max-width: 480px; margin: 0 auto 26px; }
-    .signup-card iframe { border-radius: var(--radius-md); }
-    .signup-note { color: var(--muted); font-size: 0.82rem; margin-top: 18px; }
-    .signup-note b { color: var(--gold); }
+.btn-ghost {
+  background: transparent;
+  color: var(--teal);
+  border-color: rgba(45, 110, 110, 0.30);
+}
+.btn-ghost:hover {
+  background: var(--mint);
+  border-color: var(--teal);
+  transform: translateY(-2px);
+}
 
-    /* ---------- What's inside cards ---------- */
-    .section-pad { padding: 88px 0; }
-    .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .card {
-      background: linear-gradient(165deg, var(--ink-700), rgba(17, 26, 46, 0.5));
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: 32px 28px;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-    .card:hover { transform: translateY(-6px); border-color: rgba(255, 0, 176, 0.4); }
-    .card-icon {
-      width: 52px; height: 52px;
-      border-radius: 15px;
-      display: grid; place-items: center;
-      background: rgba(255, 0, 176, 0.12);
-      color: var(--pink);
-      margin-bottom: 20px;
-    }
-    .card h3 { font-size: 1.22rem; margin-bottom: 10px; }
-    .card p { color: var(--muted); font-size: 0.95rem; }
-    @media (max-width: 900px) { .cards-3 { grid-template-columns: 1fr; } }
+.btn-lg { padding: 18px 36px; font-size: 17px; }
 
-    /* ---------- Free band ---------- */
-    .free-band {
-      background:
-        radial-gradient(600px 300px at 50% 0%, rgba(255, 0, 176, 0.12), transparent 70%),
-        var(--ink-900);
-      border-block: 1px solid var(--line);
-      text-align: center;
-      padding: 76px 0;
-    }
-    .free-badge {
-      width: 92px; height: 92px;
-      margin: 0 auto 24px;
-      border-radius: 50%;
-      display: grid; place-items: center;
-      background: rgba(255, 0, 176, 0.1);
-      border: 1px solid rgba(255, 0, 176, 0.4);
-      color: var(--pink);
-    }
-    .free-band h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); margin-bottom: 14px; }
-    .free-band h2 em { font-style: normal; color: var(--pink); }
-    .free-band p { color: var(--muted); max-width: 560px; margin: 0 auto 30px; }
+/* ===================== Nav ===================== */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nav-h);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  background: rgba(247, 249, 248, 0.72);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+.nav.scrolled {
+  border-bottom-color: var(--line);
+  box-shadow: 0 6px 24px -18px rgba(61,79,92,.4);
+}
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
 
-    /* ---------- Launch note ---------- */
-    .launch-note {
-      margin: 0 auto;
-      max-width: 760px;
-      border: 1px dashed rgba(163, 148, 255, 0.5);
-      background: rgba(163, 148, 255, 0.07);
-      border-radius: var(--radius-lg);
-      padding: 40px 34px;
-      text-align: center;
-    }
-    .launch-note .eyebrow { justify-content: center; }
-    .launch-note h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); margin: 14px 0 12px; }
-    .launch-note p { color: var(--muted); max-width: 560px; margin: 0 auto; }
-    .launch-note p + p { margin-top: 14px; }
-    .launch-sign {
-      display: block;
-      margin-top: 22px;
-      font-family: var(--font-display);
-      font-weight: 700;
-      color: var(--lavender);
-    }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+}
+.brand .mark {
+  width: 42px; height: 42px;
+  flex: none;
+  color: var(--teal);
+}
+.brand .wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.brand .wordmark b {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--teal);
+}
+.brand .wordmark span {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate-faint);
+}
 
-    /* ---------- Footer ---------- */
-    .site-footer {
-      border-top: 1px solid var(--line);
-      background: var(--ink-900);
-      padding: 48px 0 34px;
-      margin-top: 88px;
-      text-align: center;
-    }
-    .site-footer .logo { justify-content: center; margin-bottom: 16px; }
-    .footer-blurb { color: var(--muted); font-size: 0.92rem; max-width: 380px; margin: 0 auto 22px; }
-    .social-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
-    .social-row a {
-      width: 40px; height: 40px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      display: grid; place-items: center;
-      color: var(--muted);
-      transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-    }
-    .social-row a:hover { color: var(--pink); border-color: var(--pink); transform: translateY(-3px); }
-    .footer-bottom {
-      border-top: 1px solid var(--line);
-      padding-top: 26px;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
+/* ===================== Sections ===================== */
+.section-pad { padding-block: clamp(72px, 11vw, 132px); }
+.section-head { max-width: 720px; }
+.section-head.center { margin-inline: auto; text-align: center; }
+.section-head h2 {
+  font-size: clamp(32px, 4.6vw, 52px);
+  margin-top: 16px;
+}
+.section-head .lead {
+  margin-top: 18px;
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--slate-soft);
+}
 
-    /* ---------- Reveal on scroll ---------- */
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      html { scroll-behavior: auto; }
-    }
-  </style>
+/* ===================== Hero ===================== */
+.hero {
+  position: relative;
+  padding-top: calc(var(--nav-h) + clamp(56px, 9vw, 110px));
+  padding-bottom: clamp(48px, 7vw, 84px);
+  background:
+    radial-gradient(900px 480px at 85% -10%, var(--mint) 0%, transparent 68%),
+    radial-gradient(700px 420px at -10% 30%, var(--sand) 0%, transparent 62%),
+    var(--offwhite);
+  overflow: hidden;
+  text-align: center;
+}
+.hero-inner { max-width: 780px; margin-inline: auto; position: relative; z-index: 1; }
+.hero h1 {
+  font-size: clamp(38px, 6.4vw, 68px);
+  margin-top: 18px;
+}
+.hero .sub {
+  margin: 22px auto 0;
+  max-width: 580px;
+  font-size: clamp(17px, 1.8vw, 20px);
+  color: var(--slate-soft);
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.free-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  box-shadow: var(--sh-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--teal-deep);
+}
+.free-chip .dot-pulse {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45,110,110,0.35); }
+  50% { box-shadow: 0 0 0 7px rgba(45,110,110,0); }
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px 11px 12px;
+  background: var(--mint);
+  border-radius: var(--r-pill);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--teal-deep);
+}
+.badge .ic {
+  display: grid; place-items: center;
+  width: 30px; height: 30px;
+  background: var(--white);
+  border-radius: 50%;
+  color: var(--teal);
+}
+.badge .ic svg { width: 17px; height: 17px; }
+
+/* ===================== Signup ===================== */
+.signup { background: var(--white); }
+.signup-card {
+  max-width: 700px;
+  margin-inline: auto;
+  background: var(--offwhite);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md);
+  padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 48px);
+  text-align: center;
+}
+.signup-card h2 { font-size: clamp(28px, 3.8vw, 40px); margin-top: 14px; }
+.signup-card .lead {
+  margin: 16px auto 30px;
+  max-width: 480px;
+  color: var(--slate-soft);
+}
+.signup-card iframe { border-radius: var(--r-md); }
+.signup-note {
+  margin-top: 22px;
+  font-size: 14px;
+  color: var(--slate-soft);
+}
+.signup-note b { color: var(--teal); }
+
+/* ===================== What's inside ===================== */
+.inside-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.6vw, 28px);
+  margin-top: clamp(40px, 5vw, 64px);
+}
+.inside-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  padding: clamp(28px, 3vw, 38px) clamp(24px, 2.6vw, 32px);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease;
+}
+.inside-card:hover { transform: translateY(-6px); box-shadow: var(--sh-md); }
+.inside-card .ic {
+  display: grid; place-items: center;
+  width: 56px; height: 56px;
+  background: var(--mint);
+  color: var(--teal);
+  border-radius: 18px;
+  margin-bottom: 22px;
+}
+.inside-card .ic svg { width: 26px; height: 26px; }
+.inside-card h3 { font-size: 22px; }
+.inside-card p { margin-top: 12px; color: var(--slate-soft); font-size: 16px; }
+@media (max-width: 860px) { .inside-grid { grid-template-columns: 1fr; } }
+
+/* ===================== Free band ===================== */
+.free-band {
+  background: linear-gradient(160deg, var(--teal) 0%, var(--teal-deep) 100%);
+  color: #fff;
+  text-align: center;
+}
+.free-band .leaf-badge {
+  display: grid; place-items: center;
+  width: 84px; height: 84px;
+  margin: 0 auto 26px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  color: var(--sand);
+}
+.free-band .leaf-badge svg { width: 38px; height: 38px; }
+.free-band h2 {
+  color: #fff;
+  font-size: clamp(30px, 4.2vw, 48px);
+}
+.free-band h2 .serif-accent { color: var(--sand); }
+.free-band p {
+  margin: 18px auto 32px;
+  max-width: 560px;
+  color: rgba(255,255,255,0.82);
+  font-size: clamp(16px, 1.6vw, 19px);
+}
+.free-band .btn-primary {
+  background: #fff;
+  color: var(--teal-deep);
+}
+.free-band .btn-primary:hover { background: var(--mint); box-shadow: 0 8px 28px -6px rgba(0,0,0,0.35); }
+
+/* ===================== Launch note ===================== */
+.launch { background: var(--white); }
+.launch-note {
+  max-width: 760px;
+  margin-inline: auto;
+  background: var(--mint);
+  border-radius: var(--r-lg);
+  padding: clamp(36px, 5vw, 56px) clamp(24px, 4.5vw, 56px);
+  text-align: center;
+}
+.launch-note h2 { font-size: clamp(26px, 3.6vw, 38px); margin-top: 14px; }
+.launch-note p {
+  margin: 16px auto 0;
+  max-width: 560px;
+  color: var(--slate-soft);
+}
+.launch-sign {
+  display: block;
+  margin-top: 26px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--teal);
+}
+
+/* ===================== Footer ===================== */
+.footer {
+  background: var(--slate);
+  color: rgba(255,255,255,0.78);
+  padding-block: clamp(56px, 7vw, 88px) 0;
+  text-align: center;
+}
+.footer a { color: rgba(255,255,255,0.78); transition: color .2s ease; }
+.footer a:hover { color: #fff; }
+.footer-brand {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.footer-brand .mark { width: 52px; height: 52px; color: var(--sage); }
+.footer-brand b { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+.footer-blurb {
+  margin: 18px auto 0;
+  max-width: 420px;
+  font-size: 14.5px;
+  line-height: 1.8;
+}
+.footer-social { display: flex; justify-content: center; gap: 10px; margin-top: 26px; }
+.footer-social a {
+  display: grid; place-items: center;
+  width: 42px; height: 42px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  transition: background .2s ease, transform .2s ease;
+}
+.footer-social a:hover { background: var(--teal); transform: translateY(-2px); }
+.footer-social svg { width: 19px; height: 19px; }
+.footer-bottom {
+  margin-top: clamp(40px, 5vw, 60px);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-block: 28px 34px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ===================== Scroll reveal ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .free-chip .dot-pulse { animation: none; }
+}
+</style>
 </head>
 <body>
 
-  <!-- Announcement bar -->
-  <div class="announce">
-    💌 The <strong>FREE</strong> Nose Gym Newsletter is coming soon — sign up below to be first in line!
+<!-- ============ ICON SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-tree" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="20" cy="15" r="11"/>
+    <path d="M20 26 V9 M20 17 L13.5 11 M20 17 L26.5 11 M20 21 L15.5 17 M20 21 L24.5 17"/>
+    <path d="M20 26 V36 M20 36 L14.5 39 M20 36 L25.5 39"/>
+    <circle cx="20" cy="8.4" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="13.2" cy="10.6" r="1.1" fill="currentColor" stroke="none"/>
+    <circle cx="26.8" cy="10.6" r="1.1" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+  <symbol id="ic-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19C4 11 9 5 20 4c0 9-4 15-13 15.5"/><path d="M4 19c3-5 7-7 11-8"/></symbol>
+  <symbol id="ic-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-1.5-1.2-3.6-2-6-2-1 0-2 .1-3 .4v13c1-.3 2-.4 3-.4 2.4 0 4.5.8 6 2 1.5-1.2 3.6-2 6-2 1 0 2 .1 3 .4v-13c-1-.3-2-.4-3-.4-2.4 0-4.5.8-6 2zM12 6v13"/></symbol>
+  <symbol id="ic-smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></symbol>
+  <symbol id="ic-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+  <symbol id="ic-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></symbol>
+  <symbol id="ic-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-youtube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.2l5 2.8-5 2.8z" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Myo Family Health newsletter home">
+      <svg class="mark"><use href="#ic-tree"/></svg>
+      <span class="wordmark">
+        <b>Myo Family Health</b>
+        <span>Newsletter</span>
+      </span>
+    </a>
+    <a class="btn btn-primary" href="#signup">Join Free <svg><use href="#ic-arrow"/></svg></a>
   </div>
+</header>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="logo" href="index.html" aria-label="Nose Gym newsletter home">
-        <span class="logo-mark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v7c0 3-2.5 4-4 5.5S7 20 9.5 20c2 0 2.5-1.5 2.5-1.5s.5 1.5 2.5 1.5c2.5 0 3-2.5 1.5-4.5S12 13 12 10"/></svg>
-        </span>
-        <span>NOSE<em>GYM</em></span>
-      </a>
-      <a class="btn btn-primary" href="#signup" style="padding:11px 24px;font-size:0.88rem">Join Free →</a>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="wrap hero-inner">
-        <span class="free-flag">100% Free · Coming Soon</span>
-        <h1>The Nose Gym Newsletter.<br><span class="accent">Better breathing, in your inbox.</span></h1>
-        <p class="hero-sub">New courses, fun games, and the freshest nasal breathing and sleep info — delivered straight to you, completely free. Sign up now and be first in line for launch.</p>
-        <div class="hero-badges">
-          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg>Always Free</span>
-          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg>New Courses</span>
-          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg>Fun Games</span>
-          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg>Fresh Info</span>
-        </div>
+<main id="top">
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="free-chip reveal"><span class="dot-pulse"></span>100% Free · Official Launch Coming Soon</span>
+      <h1 class="reveal" data-delay="1">The Myo Family Health<br /><span class="serif-accent">Newsletter</span></h1>
+      <p class="sub reveal" data-delay="2">New courses, fun games, and the latest information on breathing, sleep, and myofunctional health — delivered to your inbox, completely free.</p>
+      <div class="hero-ctas reveal" data-delay="3">
+        <a class="btn btn-primary btn-lg" href="#signup">Sign Up for Free <svg><use href="#ic-arrow"/></svg></a>
+        <a class="btn btn-ghost btn-lg" href="#inside">What's Inside</a>
       </div>
-    </section>
-
-    <!-- Signup -->
-    <section class="signup" id="signup">
-      <div class="wrap">
-        <div class="signup-card reveal">
-          <span class="eyebrow" style="justify-content:center">Save Your Spot</span>
-          <h2>Sign up today — it's free</h2>
-          <p>Drop your email below and you'll be among the very first to get the newsletter when it officially launches.</p>
-          <iframe width="540" height="305" src="https://e3961feb.sibforms.com/v2/serve/MUIFAIp6RUy17cEz4RshfnfNGuq1fh4h4dR952P97BU-q72mx8NAH0Cw_ri4DzhxhMjd0BeXWM6INiNIwuXmWGAV_DkUjAnCOFtfaAo2WQhZUHN4Zj8p8l7jmq8Ht-sWyTnLOAs1nYwwg73AiX6yu7EeQ5ta5xoa2FZ3LvWUM3il6nmgCsEfgw1dTeAhVOdYfY7S52lTYAW9Tti1cA==" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;" title="Nose Gym newsletter signup form"></iframe>
-          <p class="signup-note"><b>100% free.</b> No spam, ever — just good breathing. Unsubscribe anytime.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- What's inside -->
-    <section class="section-pad" id="whats-inside" style="padding-top:0">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow" style="justify-content:center">What's Inside</span>
-          <h2>What you'll get in every issue</h2>
-          <p>Every edition is packed with things to learn, play, and try — all built around better breathing and better sleep.</p>
-        </div>
-        <div class="cards-3">
-          <article class="card reveal">
-            <div class="card-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
-            </div>
-            <h3>New Courses</h3>
-            <p>Brand-new courses on nasal breathing, sleep, and daily energy — announced in the newsletter first, so subscribers always get the head start.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="6"/><path d="M7 12h4M9 10v4"/><circle cx="16" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="18.5" cy="14" r="1" fill="currentColor" stroke="none"/></svg>
-            </div>
-            <h3>Fun Games</h3>
-            <p>Playful challenges, quizzes, and breathing games that make building better habits actually fun — for you and the whole family.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg>
-            </div>
-            <h3>New Information</h3>
-            <p>The latest tips, science, and discoveries about breathing, sleep, and wellness — explained simply, so you can put it to use right away.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Free band -->
-    <section class="free-band">
-      <div class="wrap reveal">
-        <div class="free-badge">
-          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z"/></svg>
-        </div>
-        <h2>Yes, it's <em>completely free</em></h2>
-        <p>No subscription fees, no paywalls, no catch. The Nose Gym Newsletter is our free gift to everyone who wants to breathe better, sleep deeper, and live healthier.</p>
-        <a class="btn btn-primary" href="#signup">Claim Your Free Spot →</a>
-      </div>
-    </section>
-
-    <!-- Launch note -->
-    <section class="section-pad">
-      <div class="wrap">
-        <div class="launch-note reveal">
-          <span class="eyebrow">A Quick Note On Timing</span>
-          <h2>Official launch is a few months out</h2>
-          <p>We're hard at work making the very first issue worth the wait — the official launch of the newsletter is a few months away. Sign up now and you'll be the first to know the moment it lands.</p>
-          <p>Thank you so much for your patience. It means the world to us. 💖</p>
-          <span class="launch-sign">— myofamilyhealth</span>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="wrap">
-      <a class="logo" href="index.html">
-        <span class="logo-mark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v7c0 3-2.5 4-4 5.5S7 20 9.5 20c2 0 2.5-1.5 2.5-1.5s.5 1.5 2.5 1.5c2.5 0 3-2.5 1.5-4.5S12 13 12 10"/></svg>
-        </span>
-        <span>NOSE<em>GYM</em></span>
-      </a>
-      <p class="footer-blurb">Train your breath while you sleep. The free Nose Gym Newsletter — courses, games, and fresh info in every issue.</p>
-      <div class="social-row">
-        <a href="https://instagram.com" aria-label="Instagram" rel="noopener" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://tiktok.com" aria-label="TikTok" rel="noopener" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.3 1.9 3.9 4.4 4.1v3c-1.7 0-3.2-.5-4.4-1.4v6.5c0 3.9-2.7 6.3-6.1 6.3-3.3 0-5.8-2.4-5.8-5.6 0-3.4 3-5.9 6.6-5.5v3.1c-1.9-.4-3.5.7-3.5 2.4 0 1.5 1.2 2.6 2.7 2.6 1.7 0 3-1.3 3-3.4V3h3.1Z"/></svg>
-        </a>
-        <a href="https://twitter.com" aria-label="Twitter / X" rel="noopener" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.3l-4.9-6.4L5.2 21H2.1l7.3-8.3L2 3h6.4l4.4 5.9L17.7 3Zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3Z"/></svg>
-        </a>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Nose Gym · myofamilyhealth. The newsletter is free — official launch coming soon. Thank you for your patience!</span>
+      <div class="hero-badges reveal" data-delay="4">
+        <span class="badge"><span class="ic"><svg><use href="#ic-check"/></svg></span>Always Free</span>
+        <span class="badge"><span class="ic"><svg><use href="#ic-book"/></svg></span>New Courses</span>
+        <span class="badge"><span class="ic"><svg><use href="#ic-smile"/></svg></span>Fun Games</span>
+        <span class="badge"><span class="ic"><svg><use href="#ic-bulb"/></svg></span>Fresh Info</span>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    // Reveal-on-scroll, matching the main Nose Gym site behavior
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-  </script>
+<!-- ============ SIGNUP ============ -->
+<section class="signup section-pad" id="signup">
+  <div class="wrap">
+    <div class="signup-card reveal">
+      <span class="eyebrow center">Save Your Spot</span>
+      <h2>Sign up today — <span class="serif-accent accent-underline">it's free</span></h2>
+      <p class="lead">Drop your email below and you'll be among the very first to receive the newsletter when it officially launches.</p>
+      <iframe width="540" height="305" src="https://e3961feb.sibforms.com/v2/serve/MUIFAIp6RUy17cEz4RshfnfNGuq1fh4h4dR952P97BU-q72mx8NAH0Cw_ri4DzhxhMjd0BeXWM6INiNIwuXmWGAV_DkUjAnCOFtfaAo2WQhZUHN4Zj8p8l7jmq8Ht-sWyTnLOAs1nYwwg73AiX6yu7EeQ5ta5xoa2FZ3LvWUM3il6nmgCsEfgw1dTeAhVOdYfY7S52lTYAW9Tti1cA==" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;" title="Myo Family Health newsletter signup form"></iframe>
+      <p class="signup-note"><b>100% free.</b> No spam, ever — unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INSIDE ============ -->
+<section class="section-pad" id="inside">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow center">What's Inside</span>
+      <h2>What you'll find in <span class="serif-accent">every issue</span></h2>
+      <p class="lead">Every edition is packed with things to learn, play, and try — all built around helping your family breathe better and live better.</p>
+    </div>
+    <div class="inside-grid">
+      <article class="inside-card reveal" data-delay="1">
+        <span class="ic"><svg><use href="#ic-book"/></svg></span>
+        <h3>New Courses</h3>
+        <p>Brand-new courses on breathing, sleep, and myofunctional health — announced in the newsletter first, so subscribers always get the head start.</p>
+      </article>
+      <article class="inside-card reveal" data-delay="2">
+        <span class="ic"><svg><use href="#ic-smile"/></svg></span>
+        <h3>Fun Games</h3>
+        <p>Playful challenges, quizzes, and activities that make healthy habits genuinely fun — for kids, teens, and grown-ups alike.</p>
+      </article>
+      <article class="inside-card reveal" data-delay="3">
+        <span class="ic"><svg><use href="#ic-bulb"/></svg></span>
+        <h3>New Information</h3>
+        <p>The latest tips, research, and discoveries about breathing, sleep, and whole-family wellness — explained simply, so you can put it to use right away.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FREE BAND ============ -->
+<section class="free-band section-pad">
+  <div class="wrap reveal">
+    <span class="leaf-badge"><svg><use href="#ic-gift"/></svg></span>
+    <h2>Yes, it's <span class="serif-accent">completely free</span></h2>
+    <p>No subscription fees, no paywalls, no catch. The newsletter is our free gift to every family that wants to breathe better, sleep deeper, and live healthier.</p>
+    <a class="btn btn-primary btn-lg" href="#signup">Claim Your Free Spot <svg><use href="#ic-arrow"/></svg></a>
+  </div>
+</section>
+
+<!-- ============ LAUNCH NOTE ============ -->
+<section class="launch section-pad">
+  <div class="wrap">
+    <div class="launch-note reveal">
+      <span class="eyebrow center">A Quick Note on Timing</span>
+      <h2>The official launch is <span class="serif-accent">a few months out</span></h2>
+      <p>We're hard at work making the very first issue worth the wait — the official launch of the newsletter is a few months away. Sign up now and you'll be the first to know the moment it arrives.</p>
+      <p>Thank you so much for your patience — it means the world to us.</p>
+      <span class="launch-sign">— myofamilyhealth</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <a class="footer-brand" href="#top">
+      <svg class="mark"><use href="#ic-tree"/></svg>
+      <b>Myo Family Health</b>
+    </a>
+    <p class="footer-blurb">The free Myo Family Health Newsletter — new courses, fun games, and fresh information in every issue. Official launch coming soon.</p>
+    <div class="footer-social">
+      <a href="https://instagram.com" aria-label="Instagram" rel="noopener" target="_blank"><svg><use href="#ic-instagram"/></svg></a>
+      <a href="https://youtube.com" aria-label="YouTube" rel="noopener" target="_blank"><svg><use href="#ic-youtube"/></svg></a>
+      <a href="mailto:amy@myofamilyhealth.com" aria-label="Email"><svg><use href="#ic-mail"/></svg></a>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Myo Family Health. The newsletter is free — official launch coming soon. Thank you for your patience!
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav shadow on scroll + reveal-on-scroll, matching the main site behavior
+const nav = document.getElementById("nav");
+const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("in");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+</script>
 </body>
 </html>
