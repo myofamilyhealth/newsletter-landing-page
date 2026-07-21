@@ -7,7 +7,6 @@ A free-newsletter signup landing page for **Myo Family Health**, using the offic
 - Embedded Brevo (Sendinblue) signup form
 - What's inside the newsletter: new courses, fun games, and new information
 - Clear "100% free" messaging
-- A note that the official launch is a few months out, with a thank-you for readers' patience
 
 ## Running locally
 
